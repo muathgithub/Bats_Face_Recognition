@@ -67,8 +67,8 @@ for idx, sample in enumerate(dataset):
 print("samples_to_remove: {}, samples_to_keep: {}".format(len(samples_to_remove), len(samples_to_keep)))
 
 # to remove the images that saved in the samples_to_remove from the file uncomment the remove for loop
-for pic_id in samples_to_remove:
-    os.remove(dataset[pic_id].filepath)
+# for pic_id in samples_to_remove:
+#     os.remove(dataset[pic_id].filepath)
 
 
 # adding the lables to the view and getting the new view

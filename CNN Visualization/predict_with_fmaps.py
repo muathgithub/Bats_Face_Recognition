@@ -6,7 +6,6 @@ from keras.models import load_model
 from keras.models import Model
 from matplotlib import pyplot
 
-
 # load and prepare the image
 def load_image(filename):
     # load the image
