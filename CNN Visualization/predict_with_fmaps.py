@@ -25,7 +25,7 @@ img_file_name = 'g_11.jpg'
 # load the image
 img = load_image(f'predection_images/{img_file_name}')
 # load saved model
-model = load_model('saved_models/VGG_0.982143.h5')
+model = load_model('../saved_models/VGG_0.982143.h5')
 # predict the class
 result = model.predict(img)
 

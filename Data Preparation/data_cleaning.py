@@ -76,39 +76,39 @@ view = dataset.match_tags(["has_duplicates", "duplicate"])
 
 # labelling each image with its duplication types in our case test / train
 # it works if you get the data labeled (directories tree)
-# for idx, sample in enumerate(dataset):
-#     if sample.id in samples_to_remove:
-#         continue
-#
-#     if sample.id in view:
-#         dup_idxs = np.where(similarity_matrix[idx] > thresh)[0]
-#         dup_splits = []
-#         dup_labels = {sample.ground_truth.label}
-#         for dup in dup_idxs:
-#             dup_sample = dataset[id_map[dup]]
-#             dup_split = "test" if "test" in dup_sample.tags else "train"
-#             dup_splits.append(dup_split)
-#             dup_labels.add(dup_sample.ground_truth.label)
-#
-#         sample["dup_splits"] = dup_splits
-#         sample["dup_labels"] = list(dup_labels)
-#         sample.save()
-#
-# train_w_test_dups = len(
-#     view.match(F("tags").contains("train")).match(F("dup_splits").contains("test"))
-# )
-#
-# test_w_train_dups = len(
-#     view.match(F("tags").contains("test")).match(F("dup_splits").contains("train"))
-# )
-#
-# label_mismatches = len(
-#     view.match(F("dup_labels").length() > 1)
-# )
-#
-# print("liable mismatches: {}".format(label_mismatches / 2))
-#
-# print("train_w_test_dups: {}, test_w_train_dups: {}".format(train_w_test_dups, test_w_train_dups))
+for idx, sample in enumerate(dataset):
+    if sample.id in samples_to_remove:
+        continue
+
+    if sample.id in view:
+        dup_idxs = np.where(similarity_matrix[idx] > thresh)[0]
+        dup_splits = []
+        dup_labels = {sample.ground_truth.label}
+        for dup in dup_idxs:
+            dup_sample = dataset[id_map[dup]]
+            dup_split = "test" if "test" in dup_sample.tags else "train"
+            dup_splits.append(dup_split)
+            dup_labels.add(dup_sample.ground_truth.label)
+
+        sample["dup_splits"] = dup_splits
+        sample["dup_labels"] = list(dup_labels)
+        sample.save()
+
+train_w_test_dups = len(
+    view.match(F("tags").contains("train")).match(F("dup_splits").contains("test"))
+)
+
+test_w_train_dups = len(
+    view.match(F("tags").contains("test")).match(F("dup_splits").contains("train"))
+)
+
+label_mismatches = len(
+    view.match(F("dup_labels").length() > 1)
+)
+
+print("liable mismatches: {}".format(label_mismatches / 2))
+
+print("train_w_test_dups: {}, test_w_train_dups: {}".format(train_w_test_dups, test_w_train_dups))
 
 print("Fob Compute:\n", fob.compute_uniqueness(dataset))
 

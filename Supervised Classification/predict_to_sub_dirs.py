@@ -12,7 +12,7 @@ for subdir in sub_dirs:
     new_dir = main_dir + subdir
     os.makedirs(new_dir, exist_ok=True)
 
-model = load_model('saved_models/VGG_0.982143.h5')
+model = load_model('../saved_models/VGG_0.982143.h5')
 
 test_images_dir = 'test_set/'
 test_images_number = len(os.listdir(test_images_dir))
